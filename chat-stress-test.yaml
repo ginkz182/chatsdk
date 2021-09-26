@@ -19,7 +19,7 @@ config:
       arrivalCount: 600000
       rampTo: 1200000
       name: Ramp up 2
-    - duration: 600
+    - duration: 1200
       arrivalCount: 600000
       rampTo: 0
       name: Ramp Down
