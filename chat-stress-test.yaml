@@ -1,0 +1,127 @@
+config:
+  target: "wss://qatest.amity.co:433/socket.io"
+  payload:
+      path: "./data/userdata-token.csv"
+      fields: ["userId", "deviceId", "token"]
+  socketio:
+    query:
+      EIO: 3
+      transport: websocket
+      token: {{ token }}
+  phases:
+    - duration: 1800
+      arrivalCount: 600000
+      name: Ramp up
+    - duration: 5400
+      arrivalCount: 600000
+      name: Steady-state
+    - duration: 1800
+      arrivalCount: 600000
+      rampTo: 1200000
+      name: Ramp up 2
+    - duration: 600
+      arrivalCount: 600000
+      rampTo: 0
+      name: Ramp Down
+
+before:
+  flow:
+    - log: Get first channel Id for the rest
+    - emit:          
+        channel: "channel.query"          
+        data: {
+            skip: 0,
+            limit: 10
+        }
+        capture:
+          json: $.channelId
+          as: channelId
+
+
+scenarios:
+  - name: "Scenario 1 Search-Join-Leave"
+    engine: socketio
+    weight: 95
+    flow:
+      - emit:          
+          channel: "channel.query"          
+          data: {
+              skip: 0,
+              limit: 10
+          }
+          acknowledge:
+            match:
+              json: "$.status"
+              value: "success"
+      - think: 1
+      - emit:          
+          channel: "channel.join"          
+          data: {
+              channelId: {{ channelId }}
+          }
+          acknowledge:
+            match:
+              json: "$.status"
+              value: "success"
+      - think: 1
+      - emit:          
+          channel: "channel.leave"          
+          data: {
+              channelId: {{ channelId }}
+          }
+          acknowledge:
+            match:
+              json: "$.status"
+              value: "success"
+      - think: 1 
+
+  - name: "Scenario 2 Search-Join-2Msg-Leave"
+    engine: socketio
+    weight: 5
+    flow:
+      - emit:          
+          channel: "channel.query"          
+          data: {
+              skip: 0,
+              limit: 10
+          }
+          acknowledge:
+            match:
+              json: "$.status"
+              value: "success"
+      - think: 1
+      - emit:          
+          channel: "channel.join"          
+          data: {
+              channelId: {{ channelId }}
+          }
+          acknowledge:
+            match:
+              json: "$.status"
+              value: "success"
+      - think: 1
+      - loop:
+        - emit:          
+          channel: "message.create"          
+          data: {
+              channelId: {{ channelId }}
+              data: {
+                text: "Test Message from {{ userId }} {{ $loopCount }}"
+              }
+          }
+          acknowledge:
+            match:
+              json: "$.status"
+              value: "success"
+        - think: 1
+        count: 2
+      - emit:          
+          channel: "channel.leave"          
+          data: {
+              channelId: {{ channelId }}
+          }
+          acknowledge:
+            match:
+              json: "$.status"
+              value: "success"
+      - think: 1
