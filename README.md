@@ -1,10 +1,21 @@
 # Generate Users Access Tokens
+
+This part will generate accessToken for all users in _./data/userdata.csv_
+and store in _./data/userdata-token.csv_ to be used in the tests.
+This need to be run before executing the tests.
+
+### Option 1 - Node.js
+
 **Script:** getuserdata.js
 
 `node getuserdata.js`
 
-This will generate accessToken for all users in _./data/userdata.csv_
-and store in _./data/userdata-token.csv_ to be used in the tests
+### Option 2 - Python
+
+**Script:** getuserdata.py
+
+`python getuserdata.py`
+
 
 # Test Scenarios
 ## 1. Current Production Behaviour
