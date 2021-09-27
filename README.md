@@ -19,7 +19,7 @@ This need to be run before executing the tests.
 
 # Test Scenarios
 ## 1. Current Production Behaviour
-**Script name:** chat-prod-baseline.yaml
+**Script name:** [chat-prod-baseline.yaml](https://github.com/ginkz182/chatsdk/blob/main/chat-prod-baseline.yaml)
 
 **Steps:**
 1. Ramp Up: 600k CCUs in 30 mins
@@ -28,7 +28,7 @@ This need to be run before executing the tests.
 
 
 ## 2. 2X Step Stress Test
-**Script name:** chat-prod-baseline.yaml
+**Script name:** [chat-prod-baseline.yaml](https://github.com/ginkz182/chatsdk/blob/main/chat-stress-test.yaml)
 
 **Steps:**
 1. Ramp Up: 600k CCUs in 30 mins
