@@ -6,13 +6,13 @@ This need to be run before executing the tests.
 
 ### Option 1 - Node.js
 
-**Script:** getuserdata.js
+**Script:** [getuserdata.js](https://github.com/ginkz182/chatsdk/blob/main/getuserdata.js)
 
 `node getuserdata.js`
 
 ### Option 2 - Python
 
-**Script:** getuserdata.py
+**Script:** [getuserdata.py](https://github.com/ginkz182/chatsdk/blob/main/getuserdata.py)
 
 `python getuserdata.py`
 
