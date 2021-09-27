@@ -1,14 +1,25 @@
 # Generate Users Access Tokens
-**Script:** getuserdata.js
+
+This part will generate accessToken for all users in _./data/userdata.csv_
+and store in _./data/userdata-token.csv_ to be used in the tests.
+This need to be run before executing the tests.
+
+### Option 1 - Node.js
+
+**Script:** [getuserdata.js](https://github.com/ginkz182/chatsdk/blob/main/getuserdata.js)
 
 `node getuserdata.js`
 
-This will generate accessToken for all users in _./data/userdata.csv_
-and store in _./data/userdata-token.csv_ to be used in the tests
+### Option 2 - Python
+
+**Script:** [getuserdata.py](https://github.com/ginkz182/chatsdk/blob/main/getuserdata.py)
+
+`python getuserdata.py`
+
 
 # Test Scenarios
 ## 1. Current Production Behaviour
-**Script name:** chat-prod-baseline.yaml
+**Script name:** [chat-prod-baseline.yaml](https://github.com/ginkz182/chatsdk/blob/main/chat-prod-baseline.yaml)
 
 **Steps:**
 1. Ramp Up: 600k CCUs in 30 mins
@@ -17,7 +28,7 @@ and store in _./data/userdata-token.csv_ to be used in the tests
 
 
 ## 2. 2X Step Stress Test
-**Script name:** chat-prod-baseline.yaml
+**Script name:** [chat-prod-baseline.yaml](https://github.com/ginkz182/chatsdk/blob/main/chat-stress-test.yaml)
 
 **Steps:**
 1. Ramp Up: 600k CCUs in 30 mins
